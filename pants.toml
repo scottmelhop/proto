@@ -1,0 +1,34 @@
+[GLOBAL]
+pants_version = "2.18.0"
+backend_packages = [
+  "pants.backend.codegen.protobuf.lint.buf",
+  "pants.backend.codegen.protobuf.python",
+  "pants.backend.codegen.thrift.apache.python",
+  "pants.backend.experimental.codegen.protobuf.go",
+  "pants.backend.experimental.go",
+  "pants.backend.python",
+  "pants.backend.python.typecheck.mypy",
+]
+
+# GOLANG: Remove this line for Go to work. You will also need to have Go installed locally and may
+# need to set `[golang].expected_version`.
+#
+# Normally, you would not do this in your own repository. This is only to allow non-Go users to
+# run this repository without worrying about Go being installed.
+pants_ignore.add = ["src/go"]
+
+[anonymous-telemetry]
+enabled = true
+repo_id = "205E301D-44A4-42FF-8495-C9D41871A431"
+
+[python]
+interpreter_constraints = ["CPython>=3.8,<3.11"]
+
+# Enable the "resolves" mechanism, which turns on lockfiles for user code. See
+ # https://www.pantsbuild.org/docs/python-third-party-dependencies. This also adds the
+ # `generate-lockfiles` goal for Pants to generate the lockfile for you, although in some
+ # situations you may need to manually generate it, as explained in the docs.
+enable_resolves = true
+
+[python-protobuf]
+mypy_plugin = true
